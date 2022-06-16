@@ -11,17 +11,19 @@ function  addTasktoDOM(task){
     const li=document.createElement('li');
     li.innerHTML = `
     
-    <input type="checkbox" ${task.done ? "checked" : " "} onclick = {ToggleTask(${task.id})} id="${task.id}" data-id="12" class="custom-checkbox">
+    <input type="checkbox" ${task.done ? "checked" : " "} id="${task.id}" data-id="12" class="custom-checkbox">
     <label for=${task.id}>${task.text}</label>
-    <img src="bin.jfif" onclick = {deleteTask(${task.id})} class="delete" data-id="${task.id}" />
+    <img src="bin.jfif"  class="delete" data-id="${task.id}" />
     `;
+    //onclick = {ToggleTask(${task.id})} 
     tasksList.append(li);
 }
 function renderList (text) {
     console.log(text)
     tasksList.innerHTML = " ";
+ 
     if(tasks.length<=0){
-        span.innerHTML="No task to display!!"
+        displaynotask();
     }
     else{
         span.innerHTML=""
@@ -32,7 +34,7 @@ function renderList (text) {
    tasksCounter.innerHTML = tasks.length;
 }
 function displaynotask() {
-    const span = document.createElement("span");
+   
     span.innerHTML="No Task to display!!"
     tasksList.append(span);
 }
@@ -66,7 +68,7 @@ function addTask (task) {
     if(task){
         tasks.push(task);
         console.log(tasks.length);
-        renderList();
+        renderList(add);
         showNotification("Task added successfuly")
         return;
     }
@@ -95,4 +97,21 @@ function Handleeventlistner(e) {
     }
     
 }
-addTaskInput.addEventListener('keyup',Handleeventlistner)
+function handlealleventlistner(e){
+    const target = e.target;
+    console.log(target);
+    if(target.className == "delete"){
+        const taskId = target.dataset.id;
+        deleteTask(taskId);
+        return;
+    }else if(target.className == "custom-checkbox"){
+        const taskId = target.id;
+        ToggleTask(taskId);
+        return;
+    }
+}
+function initialzeAPP(){
+    document.addEventListener('click',handlealleventlistner)
+    addTaskInput.addEventListener('keyup',Handleeventlistner)
+}
+initialzeAPP();
