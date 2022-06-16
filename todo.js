@@ -1,4 +1,5 @@
-let tasks = [];
+(function() {
+    let tasks = [];
 const tasksList = document.getElementById('list');
 const addTaskInput = document.getElementById('add');
 const tasksCounter = document.getElementById('tasks-counter-span');
@@ -35,7 +36,7 @@ function  addTasktoDOM(task){
     
     <input type="checkbox" ${task.completed ? "checked" : " "} id="${task.id}" data-id="${task.id}" class="custom-checkbox">
     <label for=${task.id}>${task.title}</label>
-    <img src="bin.jfif"  class="delete" data-id="${task.id}" />
+    <img src="https://cdn-icons-png.flaticon.com/128/1828/1828851.png"  class="delete" data-id="${task.id}" />
     `;
     //onclick = {ToggleTask(${task.id})} 
     tasksList.append(li);
@@ -157,3 +158,4 @@ function initialzeAPP(){
     addTaskInput.addEventListener('keyup',Handleeventlistner)
 }
 initialzeAPP();
+})()
