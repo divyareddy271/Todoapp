@@ -5,14 +5,25 @@ const tasksCounter = document.getElementById('tasks-counter-span');
 const span = document.getElementById('span');
 
 console.log('Working');
-
+function fetchapi(){
+    //GET Request
+    fetch("https://jsonplaceholder.typicode.com/todos")
+    .then(function(response){
+        console.log(response)
+        return response.json();
+    }).then(function(data){
+        tasks = data.slice(0,10);
+        renderList();
+    })
+    
+}
 function  addTasktoDOM(task){
     console.log(task)
     const li=document.createElement('li');
     li.innerHTML = `
     
-    <input type="checkbox" ${task.done ? "checked" : " "} id="${task.id}" data-id="12" class="custom-checkbox">
-    <label for=${task.id}>${task.text}</label>
+    <input type="checkbox" ${task.completed ? "checked" : " "} id="${task.id}" data-id="${task.id}" class="custom-checkbox">
+    <label for=${task.id}>${task.title}</label>
     <img src="bin.jfif"  class="delete" data-id="${task.id}" />
     `;
     //onclick = {ToggleTask(${task.id})} 
@@ -44,7 +55,7 @@ function ToggleTask(taskId) {
     })
     if(task.length > 0){
         const currentTask = task[0];
-        currentTask.done = !currentTask.done;
+        currentTask.completed = !currentTask.completed;
         renderList("update");
         showNotification("updated the status successfuly")
         return;
@@ -88,9 +99,9 @@ function Handleeventlistner(e) {
             return;
         }
         const task =  {
-            text,
+            title: text,
             id : Date.now().toString(),
-            done :false
+            completed :false
         }
         addTask(task);
         e.target.value="";
@@ -111,6 +122,7 @@ function handlealleventlistner(e){
     }
 }
 function initialzeAPP(){
+    fetchapi();
     document.addEventListener('click',handlealleventlistner)
     addTaskInput.addEventListener('keyup',Handleeventlistner)
 }
