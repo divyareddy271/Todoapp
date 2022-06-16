@@ -1,7 +1,8 @@
-const tasks = [];
+let tasks = [];
 const tasksList = document.getElementById('list');
 const addTaskInput = document.getElementById('add');
-const tasksCounter = document.getElementById('tasks-counter');
+const tasksCounter = document.getElementById('tasks-counter-span');
+const span = document.getElementById('span');
 
 console.log('Working');
 
@@ -10,28 +11,39 @@ function  addTasktoDOM(task){
     const li=document.createElement('li');
     li.innerHTML = `
     
-    <input type="checkbox" ${task.done ? "checked" : " "} id="${task.id}" data-id="12" class="custom-checkbox">
+    <input type="checkbox" ${task.done ? "checked" : " "} onclick = {ToggleTask(${task.id})} id="${task.id}" data-id="12" class="custom-checkbox">
     <label for=${task.id}>${task.text}</label>
-    <img src="bin.jfif" class="delete" data-id="${task.id}" />
+    <img src="bin.jfif" onclick = {deleteTask(${task.id})} class="delete" data-id="${task.id}" />
     `;
     tasksList.append(li);
 }
-function renderList () {
+function renderList (text) {
+    console.log(text)
     tasksList.innerHTML = " ";
+    if(tasks.length<=0){
+        span.innerHTML="No task to display!!"
+    }
+    else{
+        span.innerHTML=""
+    }
    for(let i=0;i<tasks.length;i++){
        addTasktoDOM(tasks[i])
    }
    tasksCounter.innerHTML = tasks.length;
 }
-
+function displaynotask() {
+    const span = document.createElement("span");
+    span.innerHTML="No Task to display!!"
+    tasksList.append(span);
+}
 function ToggleTask(taskId) {
-    const task = tasks.filter((task) => {
-        return task.id === taskId;
+    const task = tasks.filter(function(task){
+        return task.id == taskId;
     })
-    if(task.length >0){
+    if(task.length > 0){
         const currentTask = task[0];
         currentTask.done = !currentTask.done;
-        renderList();
+        renderList("update");
         showNotification("updated the status successfuly")
         return;
     }
@@ -42,11 +54,11 @@ function ToggleTask(taskId) {
 }
 
 function deleteTask (taskId) {
-    const newTaks  = tasks.filter(function(task){
-        return taskId !== task.id;
+    const newTask  = tasks.filter(function(task){
+        return  task.id !=taskId ;
     })
-    tasks = newTaks;
-    renderList();
+    tasks = newTask;
+    renderList("delete");
     showNotification("Task deleted successfuly")
 }
 
@@ -76,7 +88,7 @@ function Handleeventlistner(e) {
         const task =  {
             text,
             id : Date.now().toString(),
-            done : false
+            done :false
         }
         addTask(task);
         e.target.value="";

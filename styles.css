@@ -1,13 +1,31 @@
 
 * {
+
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
+   
+  }
+  body{
+    background-color: rgb(172, 165, 187);
+    background:linear-gradient(90deg,rgb(73, 73, 77)0%,rgb(69, 18, 224)35%,  
+    rgba(187, 10, 151, 0.637));
+  }
+  h1{
+    margin-top: 40px;
+    text-align: center;
+    color: white
+
   }
   #container {
     width: 500px;
-    
+    /* background-color: white; */
+    background:linear-gradient(to right,#b4bfbc, #9db7b9,#c4e3bf);
+    padding: 20px;
     margin: 0 auto;
-  }
+    box-sizing:border-box;
+    border-radius: 10px;
+    border: 1px solid rgb(153, 51, 150);
+   }
   ul {
     list-style-type: none;
     margin: 0;
@@ -79,20 +97,61 @@
     background: #f2f2f2;
     cursor: pointer;
   }
-  h1 {
-    text-align: center;
-  }
+ 
   .add-task {
     width: 100%;
       outline: none;
       font-size: 15px;
       padding: 11px;
-      border: 1px solid #f3f3f3;
+      border: 3px solid #07e195;
       margin-bottom: 3px;
+      border-radius: 15px;
   }
-  #total-tasks {
-    margin-bottom: 20px;
+  #total-tasks, #tasks-counter { 
     font-size: 13px;
-      margin-left: 2px;
-      color: gray;
+    padding-top:5px ;
+    padding-bottom: 5px;
+    color: white;
+  }
+  #total-tasks{
+    padding-left:5px ;
+    width:60%;
+  }
+  #list #span{
+    color: rgb(177, 57, 57);
+    font-weight: 600;
+    text-align: center;
+    align-items: center;
+    margin: auto;
+    
+    margin-left:30%;
+    padding: 10px;
+  }
+  #tasks-counter{
+    padding-right: 0px;
+    height:28px;
+    margin: auto;
+    margin-right: 5px;
+    width:28px;
+    font-weight: 600;
+    background-color: white;
+    align-items: center;
+    color: black;
+    border-radius: 100%;
+  }
+  #tasks-counter span {
+    text-align: center;
+    margin-left: 10px;
+    padding-left: 0px;
+  }
+  .task{
+    display: flex;
+    border: 1px solid black;
+    width:30%;
+    border-radius:20px ;
+    margin-left: 2px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    background:linear-gradient(to bottom right, rgb(200, 11, 175),rgb(31, 13, 166));
+    justify-content: space-between;
   }
