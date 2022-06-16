@@ -2,8 +2,22 @@
   <head>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css" />
+    <style>
+     body {
+        /* background-image: url('pexels-hasan-albari-1229861.jpg'); */
+        /* background-image: url('pexels-rahul-716398.jpg');  */
+        /* background-image: url('pexels-felix-mittermeier-956999.jpg');  */
+       /* background-image: url('pexels-andreea-ch-1166644.jpg'); */
+        background-image: url("pexels-artem-podrez-7233131.jpg");
+          /* background-image: url("pexels-artem-podrez-7233117.jpg"); */
+       background-repeat: no-repeat;
+
+  background-attachment: fixed;
+  background-size: 100% 100%;
+     }
+      </style>
   </head>
-  <body>
+  <body >
       <h1>Todo List App</h1>
     <div id="container">
         <input placeholder="Add a task" class="add-task" id="add" data-helloWord="asdasdas"/>
@@ -20,6 +34,13 @@
           </li>  -->
         </ul>
       </div>
-      <script src="todo.js"></script>
+      <!-- <script src="todo.js"></script> -->
+      <script src="todomodule.js"></script>
+      <script type="text/javascript">
+        console.log(TodoListApp)
+        TodoListApp.initialize();
+        console.log(TodoListApp.a);
+        
+      </script>
     </body>
   </html>
