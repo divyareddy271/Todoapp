@@ -5,17 +5,28 @@ const tasksCounter = document.getElementById('tasks-counter-span');
 const span = document.getElementById('span');
 
 console.log('Working');
-function fetchapi(){
-    //GET Request
-    fetch("https://jsonplaceholder.typicode.com/todos")
-    .then(function(response){
-        console.log(response)
-        return response.json();
-    }).then(function(data){
-        tasks = data.slice(0,10);
-        renderList();
-    })
+// function fetchapi(){
+//     //GET Request
+//     fetch("https://jsonplaceholder.typicode.com/todos")
+//     .then(function(response){
+//         console.log(response)
+//         return response.json();
+//     }).then(function(data){
+//         tasks = data.slice(0,10);
+//         renderList();
+//     })
     
+// }
+//convert to async and await
+async function fetchapi(){
+    //GET Request
+   try{ const response = await fetch("https://jsonplaceholder.typicode.com/todos");
+    const data = await response.json();
+    tasks = data.slice(190,203);
+    renderList();  }
+    catch(error){
+        console.log(error);
+    }
 }
 function  addTasktoDOM(task){
     console.log(task)
@@ -77,10 +88,29 @@ function deleteTask (taskId) {
 
 function addTask (task) {
     if(task){
-        tasks.push(task);
-        console.log(tasks.length);
-        renderList(add);
-        showNotification("Task added successfuly")
+        //post request but this will not work
+        fetch("https://jsonplaceholder.typicode.com/todos",{
+            method:"POST",
+            headers : {
+                'Content-Type':'application/json',
+            },
+            body:JSON.stringify(task)
+            })
+            .then(function(response){
+                console.log(response)
+                return response.json();
+            }).then(function(data){
+                console.log(data);
+                tasks.push(task);
+                renderList(add);
+                showNotification("Task added successfuly")
+            }).catch(function(error){
+                console.log(error);
+            })
+        // tasks.push(task);
+        // console.log(tasks.length);
+        // renderList(add);
+        // showNotification("Task added successfuly")
         return;
     }
     showNotification("Task can not add")
